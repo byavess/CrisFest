@@ -1,0 +1,30 @@
+<mat-toolbar color="primary">
+  <span>{{ title() }}</span>
+  <span style="flex: 1 1 auto;"></span>
+  <button mat-button (click)="enviarWhatsapp()">Contato</button>
+</mat-toolbar>
+
+<main>
+  <section class="hero">
+    <h1>Locação de Mesas para Festas</h1>
+    <p>Realizamos o seu sonho com o melhor acervo da região.</p>
+    <button mat-raised-button color="accent" (click)="enviarWhatsapp()">
+      <mat-icon>chat</mat-icon> CHAMAR NO WHATSAPP
+    </button>
+  </section>
+
+  <div class="galeria">
+    <mat-card *ngFor="let item of acervo()" class="card-mesa">
+      <img mat-card-image [src]="item.imagem" [alt]="item.nome">
+      <mat-card-header>
+        <mat-card-title>{{ item.nome }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ item.desc }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="enviarWhatsapp()">VER DETALHES</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</main>
