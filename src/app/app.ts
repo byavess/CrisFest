@@ -24,12 +24,12 @@ export class App {
   // Aqui mapeamos as pastas que vi na sua primeira imagem
   protected readonly acervo = signal([
     { 
-      nome: 'Painel e Mesas', 
-      imagem: 'assets/images/logo.jpeg', 
+      nome: 'Vamos lá Meninos', 
+      imagem: 'assets/images/praMeninos/WhatsApp Image 2026-01-16 at 14.52.24 (2).jpeg', 
       desc: 'Nosso catálogo principal' 
     },
     { 
-      nome: 'Linha Meninas', 
+      nome: 'Vamos lá Meninas', 
       imagem: 'assets/images/praMeninas/logo.jpeg', // Ajuste o nome da foto se necessário
       desc: 'Temas delicados e exclusivos' 
     },
