@@ -1,0 +1,343 @@
+/* --- Variáveis de Cores --- */
+:root {
+    --primary-color: #ffc107;
+  --background-color: #000000;
+  --text-light: #ffffff;
+
+}
+
+.app-toolbar {
+  position: sticky;
+  top: 0px;
+  z-index: 1000;
+  /* Sombra escura para destacar o header no topo */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+  padding: 0;
+ 
+  /* GARANTIA DO FUNDO PRETO PURO */
+  background-color: var(--background-color) !important;
+  color: var(--text-light);
+  height: 80px !important;
+  min-height: 64px;
+
+  background-color: #000000 !important;
+  background: #000000 !important;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Distribui logo e ações nas extremidades */
+  width: 100%;
+  height: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+
+}
+
+
+
+.logo-link {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.main-logo {
+
+  height: 100%;
+  width: auto;
+  max-width: 250px;
+  object-fit: contain;
+  padding: 8px 0;
+  /* Pequeno padding para não colar nas bordas */
+}
+
+
+/* --- NAVEGAÇÃO: Links Centralizados (Desktop) --- */
+
+.nav-links {
+  display: flex;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Classe active (página atual) */
+.nav-links>a[mat-button],
+.nav-links>.mat-button,
+.nav-links a[routerlink],
+.nav-links a[href] {
+
+  display: flex;
+  gap: 25px;
+  color: #FFED4E !important;
+  border-bottom: 2px solid #FFD700;
+  padding-bottom: 5px;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  margin-left: 20px !important;
+  margin-right: 20px !important;
+
+  box-shadow:
+    0 6px 16px rgba(255, 215, 0, 0.25),
+    inset 0 3px 0 rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-2px) scale(1.05) !important;
+
+}
+
+.user-name{
+  color:#FFD700 !important;
+
+
+}
+
+
+.user-actions button[mat-button] {
+  color: #C0C0C0 !important; /* texto 'Sair' */
+    
+    display: flex;
+
+align-items: center;
+gap: 12px;
+flex-shrink: 0;
+}
+
+.user-actions button[mat-button] mat-icon {
+  color: #C0C0C0 !important; /*  o Ícone */
+}
+
+/* Hover suave para o botão prateado */
+.user-actions button[mat-button]:hover {
+  color: #ffffff !important;
+}
+
+.user-actions button[mat-button]:hover mat-icon {
+  color: #ffffff !important;
+}
+
+
+
+.whatsapp-header {
+  color: #FFD700 !important;
+  font-size: 29px;
+  width: 50px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+
+  /* Compensa o aumento para não afetar layout */
+}
+
+.whatsapp-header-link {
+  text-decoration: none !important;
+  /* Remove o sublinhado do link */
+}
+
+.whatsapp-header:hover {
+  color: #25D366 !important;
+  /* Verde brilhante */
+  transform: scale(1.2);
+  transition: all 0.3s ease;
+}
+
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  left: 30px;
+}
+
+
+
+
+
+/* administrador*/
+.user-actions .action-icon-button:hover .mat-icon {
+  color: #FFD700 !important;
+  border-color: rgba(255, 215, 0, 0.7) !important;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15),
+      rgba(255, 215, 0, 0.2)) !important;
+  box-shadow:
+    0 6px 16px rgba(255, 235, 100, 0.4),
+    inset 0 1px 0 rgba(255, 215, 0, 0.2) !important;
+}
+
+/*localização icon*/
+.action-icon-button {
+  color: #FFD700 !important;
+   
+}
+
+
+.phone-mobile-only{
+
+  color: #FFD700 !important;
+}
+
+
+.phone-mobile-only:hover .mat-icon{
+   color: #FFD700 !important;
+  border-color: rgba(255, 215, 0, 0.7) !important;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15),
+      rgba(255, 215, 0, 0.2)) !important;
+  box-shadow:
+    0 6px 16px rgba(255, 235, 100, 0.4),
+    inset 0 1px 0 rgba(255, 215, 0, 0.2) !important;
+}
+
+/* 1. Esconde o ícone de telefone por padrão (Desktop) */
+.phone-mobile-only {
+  display: none !important;
+}
+
+
+.user-actions .menu-btn-wrap button :hover .mat-icon {
+  color: #dcdcdc !important;
+  transform: scale(1.2);
+  transition: all 0.3s ease;
+}
+
+
+.menu-btn-wrap button {
+
+  color: #FFD700 !important;
+  /* Silver mais definido */
+  background: linear-gradient(135deg, rgba(192, 192, 192, 0.1), rgba(192, 192, 192, 0.05)) !important;
+  border: 2px solid rgba(192, 192, 192, 0.5) !important;
+  border-radius: 8px !important;
+  padding: 7px !important;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+
+
+}
+
+.menu-btn-wrap {
+  color: #FFD700 !important;
+  /* Garante que o ícone tenha o tamanho desejado */
+  font-size: 29px !important;
+  width: 50px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Remover qualquer fundo que possa existir no botão (opcional) */
+  background: transparent !important;
+
+}
+
+.menu-icon {
+  font-size: 29px !important;
+  width: 29px !important;
+  height: 29px !important;
+}
+
+.menu-btn-wrap button mat-icon {
+  font-size: 28px !important;
+  /* aumenta o tamanho das linhas */
+  font-weight: 00 !important;
+  /* deixa mais espesso */
+  width: 28px !important;
+  height: 8px !important;
+  top: -3px;
+  left: -2px;
+}
+
+.menu-btn-wrap button:hover {
+  color: #FFD700 !important;
+  /* Amarelo brilhante */
+  border-color: rgba(255, 215, 0, 0.7) !important;
+  background: linear-gradient(135deg, #000000,
+      #C0C0C0) !important;
+  box-shadow:
+    0 6px 16px rgba(255, 215, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-2px) scale(1.05) !important;
+}
+
+
+@media (max-width: 600px) {
+.user-actions {
+ /* Reduz espaço entre nome e botão */
+ display: flex;
+  align-items: center;
+  gap: 0px;
+  margin-right: 15px;
+
+}
+.user-name {
+max-width: 100px; /* Diminui o espaço do nome no mobile */
+font-size: 13px;
+}
+}
+
+/* 2. Mostra o ícone apenas em telas menores (Mobile) */
+@media (max-width: 992px) {
+
+  
+  .phone-mobile-only {
+    display: inline-flex !important; /* Ou inline-flex para botões mat-icon */
+    
+  }
+  .user-actions {
+ 
+  display: flex;
+  align-items: center;
+  gap: 0px;
+
+}
+
+ .menu-btn-wrap {
+    display: flex !important;
+    /* ← Aparece em mobile */
+  }
+
+  .header-content .nav-links {
+    display: none !important;
+  }
+
+   .menu-btn-wrap {
+    display: none !important;
+    /* ← CORREÇÃO AQUI! Some em desktop */
+  }
+
+  .nav-links {
+    display: flex !important;
+    /* ← Aparece em desktop */
+  }
+
+  
+}
+
+@media (max-width: 360px) {
+
+  .user-actions {
+ 
+  display: flex;
+  align-items: center;
+  gap: 1px !important;
+
+
+}
+.main-logo,.logo-link{
+ margin-right: 55 !important;
+ display: flex !important;
+  align-items: center;
+   height: auto; /* Mantém a proporção original */
+  width: auto; /* Mantém a largura original */
+  max-width: 210px; /* Limite máximo para não quebrar o layout */
+  object-fit: contain;
+
+}
+
+
+
+}

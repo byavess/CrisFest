@@ -1,0 +1,231 @@
+<body style="background-color: #252525;">
+<div class="container-detalhes">
+  <!-- Botão Voltar -->
+  <button mat-fab extended color="primary" class="back-button" routerLink="/home">
+    <mat-icon>arrow_back</mat-icon>
+    Voltar
+  </button>
+
+  <!-- Loading -->
+  <div *ngIf="carregando" class="loading-container">
+    <mat-spinner diameter="60"></mat-spinner>
+    <p class="loading-text">Carregando detalhes do veículo...</p>
+  </div>
+
+  <!-- Mensagens de Status -->
+  <mat-card *ngIf="statusMessage.text" [ngClass]="statusMessage.type + '-message'" class="status-message">
+    <mat-card-content>
+      <mat-icon>{{ statusMessage.type === 'error' ? 'error_outline' : 'check_circle' }}</mat-icon>
+      <span>{{ statusMessage.text }}</span>
+      <button mat-icon-button (click)="statusMessage.text = ''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Detalhes do Veículo -->
+  <div *ngIf="(veiculo$ | async) as veiculo" class="detalhes-wrapper">
+
+    <!-- Grid Principal: Imagens + Informações -->
+    <div class="detalhes-grid">
+
+      <!-- Coluna Esquerda: Galeria de Imagens -->
+      <div class="galeria-container">
+        <mat-card class="galeria-card">
+          <!-- Badge de Oferta -->
+          <div class="oferta-badge-detalhes" *ngIf="veiculo.emOferta">
+            <mat-icon class="oferta-icon">local_offer</mat-icon>
+            <span class="oferta-texto">OFERTA ESPECIAL</span>
+          </div>
+
+          <!-- Imagem Principal -->
+          <div class="main-image-wrapper">
+            <img
+              [src]="selectedImage ? getImagemUrl(selectedImage) : (veiculo.urlsFotos && veiculo.urlsFotos.length ? getImagemUrl(veiculo.urlsFotos[0]) : 'https://placehold.co/800x500?text=Sem+Imagem')"
+              [alt]="veiculo.marca + ' ' + veiculo.modelo"
+              (error)="onMainImageError($event)"
+              class="main-image"
+              (click)="openImagemExpandida(selectedImage ? selectedImage : veiculo.urlsFotos[0])"
+              style="cursor: zoom-in;" />
+          </div>
+
+          <!-- Miniaturas -->
+          <div class="thumbnails-wrapper" *ngIf="veiculo.urlsFotos && veiculo.urlsFotos.length > 1">
+            <button mat-icon-button class="nav-arrow left" (click)="previousSlide(veiculo)">
+              <mat-icon>chevron_left</mat-icon>
+            </button>
+                <button mat-icon-button
+                    *ngFor="let url of veiculo.urlsFotos; let i = index"
+                    class="thumbnail-button"
+                    [class.active]="selectedImage === url || (!selectedImage && i === 0)"
+                    (click)="selectImage(url)">
+              <img
+                [src]="getImagemUrl(url)"
+                [alt]="'Foto ' + (i + 1)"
+                class="thumbnail-image"
+                (error)="onThumbnailError($event)">
+            </button>
+            <button mat-icon-button class="nav-arrow right" (click)="nextSlide(veiculo)">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+
+          </div>
+
+
+
+
+
+
+
+
+        </mat-card>
+      </div>
+
+      <!-- Coluna Direita: Informações do Veículo -->
+      <div class="info-container">
+
+        <!-- Card de Cabeçalho -->
+        <mat-card class="header-card">
+          <mat-card-header>
+            <mat-card-title class="veiculo-title">
+              {{ veiculo.marca.nome }} {{ veiculo.modelo.modelo }}
+            </mat-card-title>
+            <mat-card-subtitle class="veiculo-subtitle">
+              <mat-icon class="subtitle-icon">calendar_today</mat-icon>
+              Ano {{ veiculo.ano }}
+            </mat-card-subtitle>
+          </mat-card-header>
+
+          <!-- Preço em Destaque -->
+          <mat-card-content class="price-section">
+            <div class="price-label">Valor</div>
+            <div class="price-value">
+              R$ {{ veiculo.preco.toLocaleString('pt-BR', {minimumFractionDigits: 2}) }}
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Card de Especificações -->
+        <mat-card class="specs-card">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>info</mat-icon>
+              Especificações
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="specs-grid">
+
+              <!-- Quilometragem -->
+              <div class="spec-item" *ngIf="veiculo.km">
+                <mat-icon class="spec-icon">speed</mat-icon>
+                <div class="spec-content">
+                  <div class="spec-label">Quilometragem</div>
+                  <div class="spec-value">{{ veiculo.km.toLocaleString('pt-BR') }} km</div>
+                </div>
+              </div>
+
+              <!-- Cor -->
+              <div class="spec-item" *ngIf="veiculo.cor">
+                <mat-icon class="spec-icon">palette</mat-icon>
+                <div class="spec-content">
+                  <div class="spec-label">Cor</div>
+                  <div class="spec-value">
+                    <span class="cor-badge" [style.background-color]="getCorHex(veiculo.cor)"></span>
+                    {{ veiculo.cor }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Motor -->
+              <div class="spec-item" *ngIf="veiculo.motor">
+                <mat-icon class="spec-icon">power</mat-icon>
+                <div class="spec-content">
+                  <div class="spec-label">Motor</div>
+                  <div class="spec-value">{{ veiculo.motor }}</div>
+                </div>
+              </div>
+
+              <!-- Câmbio -->
+              <div class="spec-item" *ngIf="veiculo.cambio">
+                <mat-icon class="spec-icon">settings</mat-icon>
+                <div class="spec-content">
+                  <div class="spec-label">Câmbio</div>
+                  <div class="spec-value">{{ getCambioFormatado(veiculo.cambio) }}</div>
+                </div>
+              </div>
+
+              <!-- Combustível -->
+              <div class="spec-item" *ngIf="veiculo.combustivel">
+                <mat-icon class="spec-icon">local_gas_station</mat-icon>
+                <div class="spec-content">
+                  <div class="spec-label">Combustível</div>
+                  <div class="spec-value">{{ getCombustivelFormatado(veiculo.combustivel) }}</div>
+                </div>
+              </div>
+
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Card de Descrição -->
+        <mat-card class="description-card" *ngIf="veiculo.descricao">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>description</mat-icon>
+              Descrição
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="description-text">{{ veiculo.descricao }}</p>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Card de Ações -->
+        <mat-card class="actions-card">
+          <mat-card-content>
+            <div class="actions-buttons">
+              <button mat-raised-button color="accent" class="btn-whatsapp" (click)="openWhatsApp(veiculo)">
+                <mat-icon>chat</mat-icon>
+                Consultar opções de financiamento
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Dialog para imagem expandida -->
+  <ng-template #imagemExpandida>
+    <div class="imagem-expandida-dialog">
+      <!-- Botão de Fechar -->
+      <button
+        mat-icon-button
+        class="close-dialog-button"
+        mat-dialog-close
+        aria-label="Fechar">
+        <mat-icon>close</mat-icon>
+      </button>
+
+      <!-- Indicador de Zoom -->
+      <div class="zoom-indicator" *ngIf="zoomLevel > 1">
+        Zoom: {{ zoomLevel }}x
+      </div>
+
+      <!-- Imagem Principal com Zoom -->
+      <img
+        #expandedImage
+        [src]="getImagemUrl(imagemExpandidaUrl || '')"
+        alt="Imagem expandida"
+        [class.zoomed]="zoomLevel === 2"
+        [class.zoomed-max]="zoomLevel === 3"
+        (click)="toggleZoom()"
+        style="display: block; margin: auto;" />
+    </div>
+  </ng-template>
+
+</div>
+
+</body>
