@@ -146,13 +146,13 @@ export class VeiculoService {
    * @param whatsappNumber Número do WhatsApp (com DDI)
    * @param customMessage Mensagem personalizada (opcional)
    */
-  openWhatsApp(veiculo?: IVeiculo, whatsappNumber: string = '61984321908', customMessage?: string): void {
+  openWhatsApp(veiculo?: IVeiculo, whatsappNumber: string = '5561986035246', customMessage?: string): void {
     let message: string;
 
     if (customMessage) {
       message = customMessage;
     } else if (veiculo) {
-      message = `Olá! Tenho interesse no veículo:
+      message = `Olá! Tenho interesse nessa peça:
 
 🏎️ ${veiculo.marca} ${veiculo.modelo}
 📅 Ano: ${veiculo.ano}

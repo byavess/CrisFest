@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "veiculos-frontend": {
+    "CrisFest": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/veiculos-frontend",
+            "outputPath": "dist/CrisFest",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [],
@@ -56,7 +56,7 @@
                 }
               ],
               "outputHashing": "all",
-              "baseHref": "/Veiculos-frontend/"
+              "baseHref": "/CrisFest/"
             },
             "development": {
               "optimization": false,
@@ -70,10 +70,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "veiculos-frontend:build:production"
+              "buildTarget": "CrisFest:build:production"
             },
             "development": {
-              "buildTarget": "veiculos-frontend:build:development"
+              "buildTarget": "CrisFest:build:development"
             }
           },
           "defaultConfiguration": "development"

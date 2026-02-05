@@ -28,8 +28,8 @@ export class Home implements OnInit, OnDestroy {
   pageSizeOptions: number[] = [12, 24, 36];
   loading: boolean = false;
   erroCarregamento: boolean = false;
-  private whatsappNumber = '5561995729366';
-  private defaultMessage = 'Olá! Gostaria de mais de mais informações sobre os veiculos disponíveis?';
+  private whatsappNumber = '5561986035246';
+  private defaultMessage = 'Olá! Gostaria de mais de mais informações sobre ....';
   anoCorrente: number = new Date().getFullYear();
 
   // Controle do carrossel de imagens
